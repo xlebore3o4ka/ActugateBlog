@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xlebore3o4ka.github.io/ActugateBlog/sitemap.xml
