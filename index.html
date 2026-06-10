@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>Actugate — логическая песочница с поршнями, активаторами и коробками</title>
-<meta name="description" content="Actugate blog — блог о разработке детерминированной 2D-песочницы, где можно строить механизмы из поршней, активаторов и коробок. Разработка игры на Nim и Raylib за авторством xlebore3o4ka">
-<meta name="keywords" content="Actugate, sandbox, game, pistons, activators, boxes, logic game, indie, игра, песочница, логическая игра, Nim, Raylib, поршни, инди-игра, Actugate blog, Actuate, детерминированная, Актугейт, Эктугейт, Актугэйт, Эктугэйт, xlebore3o4ka, хлеборезочка"><link rel="canonical" href="https://xlebore3o4ka.github.io/ActugateBlog/"><meta name="robots" content="index, follow">
+    <meta name="description" content="Actugate blog — блог о разработке детерминированной 2D-песочницы, где можно строить механизмы из поршней, активаторов и коробок. Разработка игры на Nim и Raylib за авторством xlebore3o4ka">
+    <meta name="keywords" content="Actugate, sandbox, game, pistons, activators, boxes, logic game, indie, игра, песочница, логическая игра, Nim, Raylib, поршни, инди-игра, Actugate blog, Actuate, детерминированная, Актугейт, Эктугейт, Актугэйт, Эктугэйт, xlebore3o4ka, хлеборезочка">
+    <link rel="canonical" href="https://xlebore3o4ka.github.io/ActugateBlog/">
+    <meta name="robots" content="index, follow">
+
+    <!-- Подключение шрифта JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
@@ -31,6 +37,36 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
             min-height: 100vh;
+        }
+
+        /* Применяем JetBrains Mono для кода */
+        code, pre, .post-meta time, .post-folder-name {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        /* Основной текст в коде */
+        .post code {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-weight: 500;
+            background-color: rgba(226, 225, 225, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .post pre {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background-color: rgba(226, 225, 225, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .post pre code {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background: none;
+            padding: 0;
         }
 
         /* Шапка */
@@ -192,7 +228,7 @@
         }
 
         .post-meta time {
-            font-family: monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .post-folder-name {
@@ -206,6 +242,7 @@
             white-space: nowrap;
             transition: color 0.2s ease;
             cursor: default;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .post:hover .post-folder-name {
@@ -240,27 +277,6 @@
         .post ul ul { list-style-type: circle; }
         .post ol { list-style-type: decimal; }
         .post li { margin-bottom: 0.5rem; }
-
-        .post code {
-            background-color: rgba(226, 225, 225, 0.1);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: "Courier New", monospace;
-            font-size: 0.9rem;
-        }
-
-        .post pre {
-            background-color: rgba(226, 225, 225, 0.05);
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-
-        .post pre code {
-            background: none;
-            padding: 0;
-        }
 
         .post blockquote {
             border-left: 3px solid var(--accent);
