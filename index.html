@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actugate blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg: #202426;
+            --bg-card: #17181a;
+            --header-bg: #07070b;
+            --text: #e2e1e1;
+            --accent: #23af5f;
+            --icon-color: #e2e1e1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(180deg, var(--bg) 0%, var(--header-bg) 200%);
+            background-attachment: fixed;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Шапка */
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(7, 7, 11, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(226, 225, 225, 0.08);
+            padding: 0.75rem 2rem;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .site-icon {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+        }
+
+        .site-icon-fallback {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent);
+            transition: color 0.2s ease;
+        }
+
+        .logo:hover .site-icon-fallback {
+            color: var(--text);
+        }
+
+        .logo-text {
+            color: var(--text);
+            transition: color 0.2s ease;
+        }
+
+        .logo:hover .logo-text {
+            color: var(--accent);
+        }
+
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .social-links a {
+            color: var(--icon-color);
+            font-size: 1.35rem;
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: opacity 0.2s ease;
+        }
+
+        .profile:hover {
+            opacity: 0.8;
+        }
+
+        .profile-name {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .profile-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .profile-avatar-placeholder {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #1a7a45);
+            border: 2px solid var(--accent);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .post {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(226, 225, 225, 0.196);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .post:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            border-color: rgba(226, 225, 225, 0.25);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(226, 225, 225, 0.1);
+            padding-bottom: 1rem;
+            position: relative;
+        }
+
+        .post-meta {
+            font-size: 0.85rem;
+            color: rgba(226, 225, 225, 0.6);
+            flex-shrink: 0;
+        }
+
+        .post-meta time {
+            font-family: monospace;
+        }
+
+        .post-folder-name {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.5px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            transition: color 0.2s ease;
+            cursor: default;
+        }
+
+        .post:hover .post-folder-name {
+            color: var(--accent);
+        }
+
+        .post h1, .post h2, .post h3 {
+            color: var(--text);
+        }
+
+        .post h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .post h2 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .post h3 { font-size: 1.25rem; margin-top: 1rem; margin-bottom: 0.5rem; }
+
+        .post p { margin-bottom: 1rem; }
+
+        .post a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .post a:hover {
+            text-decoration: underline;
+        }
+
+        .post ul, .post ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .post ul { list-style-type: disc; }
+        .post ul ul { list-style-type: circle; }
+        .post ol { list-style-type: decimal; }
+        .post li { margin-bottom: 0.5rem; }
+
+        .post code {
+            background-color: rgba(226, 225, 225, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+            font-size: 0.9rem;
+        }
+
+        .post pre {
+            background-color: rgba(226, 225, 225, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .post pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .post blockquote {
+            border-left: 3px solid var(--accent);
+            margin: 1rem 0;
+            padding-left: 1rem;
+            color: rgba(226, 225, 225, 0.7);
+        }
+
+        .post-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: block;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(226, 225, 225, 0.1);
+            margin: 1rem 0;
+        }
+
+        .post table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        .post th, .post td {
+            border: 1px solid rgba(226, 225, 225, 0.2);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        .post th {
+            background-color: rgba(226, 225, 225, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .profile-name { display: none; }
+            .right-section { gap: 1rem; }
+            .social-links { gap: 0.75rem; }
+
+            .post-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+                position: static;
+            }
+
+            .post-folder-name {
+                position: static;
+                transform: none;
+                white-space: normal;
+                font-size: 1.2rem;
+                order: -1;
+                margin-bottom: 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a class="logo" href="#">
+                <img src="icon.png" alt="icon" class="site-icon">
+                <span class="logo-text">Actugate blog</span>
+            </a>
+            <div class="right-section">
+                <div class="social-links">
+                    <a href="https://t.me/actugate" target="_blank"><i class="fab fa-telegram"></i></a>
+                    <a href="https://habr.com/ru/users/actugate/" target="_blank"><i class="fas fa-newspaper"></i></a>
+                    <a href="https://youtube.com/@actugate" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://xlebore3o4ka.itch.io/" target="_blank"><i class="fab fa-itch-io"></i></a>
+                </div>
+                <a href="https://github.com/xlebore3o4ka" class="profile" target="_blank"><span class="profile-name">xlebore3o4ka</span><img src="avatar.png" alt="avatar" class="profile-avatar"></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <article class="post">
+            <div class="post-header">
+                <div class="post-meta">
+                    <time datetime="2026-06-11T01:02:39.764412">Jun 11, 2026 01:02</time>
+                </div>
+                <div class="post-folder-name">Привет, мир!</div>
+            </div>
+            <h3>Я считаю блог должен начаться с демонстрации</h3>
+<p><img src="posts/Привет, мир!/demo.gif" class="post-image" alt="демо-гифка!" width="250" /></p>
+<blockquote>
+<p>На этой демо-гифке изображен простой механизм нелинейного перемещения коробки<br />
+Можно увидеть как липкие поршни толкают активаторы, которые активируют другие<br />
+поршни и так далее... В конце концов коробка не просто двигается вперед, но еще и вбок!</p>
+</blockquote>
+<p>Хотелось бы разобрать все по отдельности, например видите ли красную стрелочку<br />
+над одним из поршней? Это приоритет по которому поршни определяют кто из них активируется<br />
+при конфликте. А стержни - это не визуальный эффект, а отдельный тип клетки.</p>
+<p>Подробнее о всех механиках можно узнать <a href="https://xlebore3o4ka.itch.io/actugate">здесь</a> и <a href="https://telegra.ph/Actugate-06-09">тут</a> на русском.</p>
+<hr />
+<h3>Но не обманывайтесь картинкой.</h3>
+<p>То что вы видели на гифке это раннее, очень сырое начало. Да там есть анимации,<br />
+да оно работает без багов, но реализовано оно... очень слабо.</p>
+<hr />
+<h2>С чего все началось?</h2>
+<p>Забавно, но с <a href="https://www.youtube.com/watch?v=RL1SOiTODgA">этого</a> видео на ютубе. Мне<br />
+<strong>так сильно</strong> понравилась механика, что я захотел сделать что-то похожее, абстрагируясь<br />
+от трех-мерного пространства.</p>
+<p>Прототип был написан на <code>python</code>, а в качестве графического движка использовался <code>py-raylib-cffi</code>.</p>
+<p>Сегодня же я пишу прототип на <code>Nim</code>, а отрисовываю все тем же <code>raylib</code>. Честно<br />
+говоря, благодаря этому проекту я и встретил сей прекрасный язык <code>Nim</code> и планирую<br />
+полностью перейти на него.</p>
+<hr />
+<div style="display: flex; justify-content: center;">
+    <img src="posts/Привет, мир!/banner.png" class="post-image" style="width: 70%; object-fit: cover;">
+</div>
+
+<h2>Что будет в блоге?</h2>
+<p>Здесь же я планирую выкладывать как процесс разработки и новости, так и <strong>идеи</strong>.<br />
+По большей части я делаю это для себя и сомневаюсь что кто-то наткнется на этот блог.<br />
+А если такое и случится, со мной всегда можно связаться в дискорде: <code>@xlebore3o4ka</code>.</p>
+<p>Я планирую выкладывать и гифки, и внутренности игры. Для меня это важно, что бы не забросить,<br />
+а так же иметь память об игре в цифровом виде.</p>
+<blockquote>
+<p>Да, если кто-то не понял игры сейчас тупо нет, даже беты. Даже альфы...</p>
+</blockquote>
+<p>Разрабатываю я игру один и планирую сделать ее полностью бесплатной...</p>
+<p>Наверное...</p>
+<hr />
+<h2>TODO на сегодня:</h2>
+<ul>
+<li>определиться с сигнатурой планов</li>
+<li>реализовать минимальный алгоритм сбора планов</li>
+<li>залить блог на github pages</li>
+<li>попить чаю</li>
+<li>🤗</li>
+</ul>
+        </article>
+        
+    </main>
+</body>
+</html>
