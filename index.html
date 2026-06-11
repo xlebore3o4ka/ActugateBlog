@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>Actugate — логическая песочница с поршнями, активаторами и коробками</title>
-    <meta name="description" content="Actugate blog — блог о разработке детерминированной 2D-песочницы, где можно строить механизмы из поршней, активаторов и коробок">
-    <meta name="keywords" content="Actugate, sandbox, game, pistons, activators, boxes, logic game, indie, игра, песочница, логическая игра">
+    <title>Actugate — deterministic sandbox with pistons, activators and boxes</title>
+    <meta name="description" content="Actugate blog — development blog about deterministic 2D sandbox where you can build mechanisms from pistons, activators and boxes">
+    <meta name="keywords" content="Actugate, sandbox, game, pistons, activators, boxes, logic game, indie, Nim, Raylib">
     <link rel="canonical" href="https://xlebore3o4ka.github.io/ActugateBlog/">
     <meta name="robots" content="index, follow">
 
-    <!-- Подключаем шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -39,7 +38,6 @@
             min-height: 100vh;
         }
 
-        /* Стили для кода */
         code, pre, .post-meta time {
             font-family: 'JetBrains Mono', 'Courier New', monospace;
         }
@@ -67,7 +65,6 @@
             padding: 0;
         }
 
-        /* Шапка */
         .header {
             position: sticky;
             top: 0;
@@ -186,14 +183,12 @@
             border: 2px solid var(--accent);
         }
 
-        /* Контейнер с постами */
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 1rem;
         }
 
-        /* Стиль карточки поста */
         .post {
             background-color: var(--bg-card);
             border-radius: 12px;
@@ -209,7 +204,6 @@
             border-color: rgba(226, 225, 225, 0.25);
         }
 
-        /* Анимации появления/исчезновения при скролле */
         .fade-in-up {
             opacity: 0;
             transform: translateY(30px);
@@ -222,21 +216,79 @@
             transform: translateY(0);
         }
 
-        /* Заголовочная часть поста */
         .post-header {
             margin-bottom: 1.5rem;
             border-bottom: 1px solid rgba(226, 225, 225, 0.1);
             padding-bottom: 1rem;
         }
 
+        .post-title-wrapper {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
         .post-title {
             font-size: 1.8rem;
             color: var(--text);
-            margin: 0 0 0.75rem 0;
+            margin: 0;
             line-height: 1.3;
+            flex: 1;
         }
 
-        /* Мета-информация: дата и теги в одной строке */
+        .quote-icon {
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+            color: var(--accent);
+            font-size: 1.5rem;
+            transition: transform 0.2s ease, color 0.2s ease;
+            padding: 0.25rem;
+        }
+
+        .quote-icon:hover {
+            transform: scale(1.1);
+            color: var(--text);
+        }
+
+        .quote-tooltip {
+            position: absolute;
+            visibility: hidden;
+            opacity: 0;
+            right: 0;
+            top: 100%;
+            margin-top: 0.5rem;
+            width: 320px;
+            background-color: #2a2e33;
+            border: 1px solid rgba(226, 225, 225, 0.196);
+            border-radius: 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            pointer-events: none;
+        }
+
+        .quote-icon:hover .quote-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .quote-tooltip-content {
+            padding: 1rem;
+            position: relative;
+            border-left: 3px solid var(--accent);
+        }
+
+        .quote-tooltip-content p {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            font-style: italic;
+            color: var(--text);
+        }
+
         .post-meta {
             display: flex;
             justify-content: space-between;
@@ -252,7 +304,6 @@
             flex-shrink: 0;
         }
 
-        /* Стили для тегов */
         .post-tags {
             display: flex;
             flex-wrap: wrap;
@@ -279,7 +330,6 @@
             opacity: 0.9;
         }
 
-        /* Содержимое поста */
         .post-content h1 { font-size: 1.6rem; margin: 1rem 0 0.75rem; }
         .post-content h2 { font-size: 1.4rem; margin: 1.25rem 0 0.6rem; }
         .post-content h3 { font-size: 1.2rem; margin: 1rem 0 0.5rem; }
@@ -314,7 +364,6 @@
             margin: 1rem 0;
         }
 
-        /* Таблицы */
         .post-content table {
             border-collapse: collapse;
             width: 100%;
@@ -333,7 +382,6 @@
             background-color: rgba(226, 225, 225, 0.05);
         }
 
-        /* Адаптивность */
         @media (max-width: 768px) {
             .container { padding: 0.75rem; }
             .post { padding: 1rem; }
@@ -341,6 +389,11 @@
             .post-content h1 { font-size: 1.3rem; }
             .post-content h2 { font-size: 1.2rem; }
             .post-content h3 { font-size: 1.1rem; }
+
+            .quote-tooltip {
+                width: 280px;
+                right: -10px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -369,6 +422,27 @@
             }
 
             .tag { font-size: 0.6rem; padding: 0.15rem 0.5rem; }
+
+            .quote-icon .quote-tooltip {
+                width: 260px;
+                right: -20px;
+            }
+        }
+
+        @media (pointer: coarse) {
+            .quote-tooltip {
+                pointer-events: auto;
+            }
+
+            .quote-icon .quote-tooltip {
+                visibility: hidden;
+                opacity: 0;
+            }
+
+            .quote-icon.active .quote-tooltip {
+                visibility: visible;
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -395,7 +469,17 @@
         
         <article class="post fade-in-up" data-date="1781114559.764412">
             <div class="post-header">
-                <h1 class="post-title">Первый devlog Actugate</h1>
+                <div class="post-title-wrapper">
+                    <h1 class="post-title">Первый devlog Actugate</h1>
+                    <div class="quote-icon" data-description="Рассказываю о первых шагах разработки">
+                        <i class="fas fa-quote-right"></i>
+                        <div class="quote-tooltip">
+                            <div class="quote-tooltip-content">
+                                <p>Рассказываю о первых шагах разработки</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="post-meta">
                     <time datetime="2026-06-11T01:02:39.764412">Jun 11, 2026 01:02</time>
                     <div class="post-tags"><span class="tag" style="background-color: #2c3e50;">devlog</span><span class="tag" style="background-color: #27ae60;">update</span><span class="tag" style="background-color: #16a085;">announcement</span></div>
@@ -457,7 +541,6 @@
     </main>
 
     <script>
-        // Intersection Observer для анимации появления постов при скролле
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -467,21 +550,16 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Можно раскомментировать, если хочешь, чтобы анимация срабатывала только один раз
-                    // observer.unobserve(entry.target);
                 } else {
-                    // Убираем класс, когда пост уходит из зоны видимости
                     entry.target.classList.remove('visible');
                 }
             });
         }, observerOptions);
 
-        // Наблюдаем за всеми постами
         document.querySelectorAll('.post').forEach(post => {
             observer.observe(post);
         });
 
-        // Немедленно проверяем видимые посты (для постов в зоне видимости при загрузке)
         setTimeout(() => {
             document.querySelectorAll('.post').forEach(post => {
                 const rect = post.getBoundingClientRect();
@@ -491,6 +569,38 @@
                 }
             });
         }, 100);
+
+        if (window.matchMedia('(pointer: coarse)').matches) {
+            document.querySelectorAll('.quote-icon').forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isActive = icon.classList.contains('active');
+
+                    document.querySelectorAll('.quote-icon.active').forEach(activeIcon => {
+                        if (activeIcon !== icon) {
+                            activeIcon.classList.remove('active');
+                        }
+                    });
+
+                    if (!isActive) {
+                        icon.classList.add('active');
+
+                        const closeTooltip = (e) => {
+                            if (!icon.contains(e.target)) {
+                                icon.classList.remove('active');
+                                document.removeEventListener('click', closeTooltip);
+                            }
+                        };
+
+                        setTimeout(() => {
+                            document.addEventListener('click', closeTooltip);
+                        }, 0);
+                    } else {
+                        icon.classList.remove('active');
+                    }
+                });
+            });
+        }
     </script>
 </body>
 </html>
