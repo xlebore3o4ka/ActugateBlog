@@ -2,21 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>Actugate — логическая песочница с поршнями, активаторами и коробками</title>
-    <meta name="description" content="Actugate blog — блог о разработке детерминированной 2D-песочницы, где можно строить механизмы из поршней, активаторов и коробок. Разработка игры на Nim и Raylib за авторством xlebore3o4ka">
-    <meta name="keywords" content="Actugate, sandbox, game, pistons, activators, boxes, logic game, indie, игра, песочница, логическая игра, Nim, Raylib, поршни, инди-игра, Actugate blog, Actuate, детерминированная, Актугейт, Эктугейт, Актугэйт, Эктугэйт, xlebore3o4ka, хлеборезочка">
+    <meta name="description" content="Actugate blog — блог о разработке детерминированной 2D-песочницы, где можно строить механизмы из поршней, активаторов и коробок">
+    <meta name="keywords" content="Actugate, sandbox, game, pistons, activators, boxes, logic game, indie, игра, песочница, логическая игра">
     <link rel="canonical" href="https://xlebore3o4ka.github.io/ActugateBlog/">
     <meta name="robots" content="index, follow">
-    <meta property="og:title">
-    <meta property="og:description">
-    <meta property="og:image">
 
-    <!-- Подключение шрифта JetBrains Mono -->
+    <!-- Подключаем шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         :root {
             --bg: #202426;
@@ -42,19 +39,18 @@
             min-height: 100vh;
         }
 
-        /* Применяем JetBrains Mono для кода */
-        code, pre, .post-meta time, .post-folder-name {
+        /* Стили для кода */
+        code, pre, .post-meta time {
             font-family: 'JetBrains Mono', 'Courier New', monospace;
         }
 
-        /* Основной текст в коде */
         .post code {
             font-family: 'JetBrains Mono', 'Courier New', monospace;
             font-weight: 500;
             background-color: rgba(226, 225, 225, 0.1);
             padding: 0.2rem 0.4rem;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .post pre {
@@ -67,7 +63,6 @@
         }
 
         .post pre code {
-            font-family: 'JetBrains Mono', 'Courier New', monospace;
             background: none;
             padding: 0;
         }
@@ -76,10 +71,10 @@
         .header {
             position: sticky;
             top: 0;
-            background-color: rgba(7, 7, 11, 0.85);
+            background-color: rgba(7, 7, 11, 0.95);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(226, 225, 225, 0.08);
-            padding: 0.75rem 2rem;
+            padding: 0.5rem 1rem;
             z-index: 100;
         }
 
@@ -89,93 +84,91 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
+            gap: 0.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
             transition: opacity 0.2s ease;
+            flex-shrink: 0;
         }
 
-        .logo:hover {
-            opacity: 0.8;
-        }
+        .logo:hover { opacity: 0.8; }
 
         .site-icon {
-            width: 64px;
-            height: 64px;
+            width: 40px;
+            height: 40px;
             object-fit: contain;
         }
 
         .site-icon-fallback {
-            width: 64px;
-            height: 64px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: var(--accent);
-            transition: color 0.2s ease;
-        }
-
-        .logo:hover .site-icon-fallback {
-            color: var(--text);
         }
 
         .logo-text {
             color: var(--text);
             transition: color 0.2s ease;
+            font-size: 1rem;
         }
 
-        .logo:hover .logo-text {
-            color: var(--accent);
-        }
+        .logo:hover .logo-text { color: var(--accent); }
 
         .right-section {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
+            flex-shrink: 1;
+            min-width: 0;
         }
 
         .social-links {
             display: flex;
-            gap: 1.25rem;
+            gap: 0.75rem;
+            flex-shrink: 1;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .social-links a {
             color: var(--icon-color);
-            font-size: 1.35rem;
+            font-size: 1.2rem;
             transition: color 0.2s ease;
             text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
         }
 
-        .social-links a:hover {
-            color: var(--accent);
-        }
+        .social-links a:hover { color: var(--accent); }
 
         .profile {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
             text-decoration: none;
             color: var(--text);
             transition: opacity 0.2s ease;
+            flex-shrink: 0;
         }
 
-        .profile:hover {
-            opacity: 0.8;
-        }
+        .profile:hover { opacity: 0.8; }
 
-        .profile-name {
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
+        .profile-name { font-size: 0.85rem; font-weight: 500; }
 
         .profile-avatar {
             width: 32px;
@@ -193,16 +186,18 @@
             border: 2px solid var(--accent);
         }
 
+        /* Контейнер с постами */
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
         }
 
+        /* Стиль карточки поста */
         .post {
             background-color: var(--bg-card);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1.5rem;
             margin-bottom: 2rem;
             border: 1px solid rgba(226, 225, 225, 0.196);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -214,76 +209,81 @@
             border-color: rgba(226, 225, 225, 0.25);
         }
 
+        /* Заголовочная часть поста */
         .post-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 1.5rem;
             border-bottom: 1px solid rgba(226, 225, 225, 0.1);
             padding-bottom: 1rem;
-            position: relative;
         }
 
+        .post-title {
+            font-size: 1.8rem;
+            color: var(--text);
+            margin: 0 0 0.75rem 0;
+            line-height: 1.3;
+        }
+
+        /* Мета-информация: дата и теги в одной строке */
         .post-meta {
-            font-size: 0.85rem;
-            color: rgba(226, 225, 225, 0.6);
-            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
         }
 
         .post-meta time {
             font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: rgba(226, 225, 225, 0.6);
+            flex-shrink: 0;
         }
 
-        .post-folder-name {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: 0.5px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            transition: color 0.2s ease;
-            cursor: default;
+        /* Стили для тегов */
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
             font-family: 'JetBrains Mono', monospace;
+            color: white;
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
+            transition: transform 0.1s ease, opacity 0.2s ease;
+            cursor: default;
         }
 
-        .post:hover .post-folder-name {
-            color: var(--accent);
+        .tag:hover {
+            transform: translateY(-1px);
+            opacity: 0.9;
         }
 
-        .post h1, .post h2, .post h3 {
-            color: var(--text);
+        /* Содержимое поста */
+        .post-content h1 { font-size: 1.6rem; margin: 1rem 0 0.75rem; }
+        .post-content h2 { font-size: 1.4rem; margin: 1.25rem 0 0.6rem; }
+        .post-content h3 { font-size: 1.2rem; margin: 1rem 0 0.5rem; }
+        .post-content p { margin-bottom: 0.8rem; line-height: 1.6; }
+        .post-content a { color: var(--accent); text-decoration: none; }
+        .post-content a:hover { text-decoration: underline; }
+
+        .post-content ul, .post-content ol {
+            margin: 0.75rem 0;
+            padding-left: 1.5rem;
         }
 
-        .post h1 { font-size: 1.8rem; margin-bottom: 1rem; }
-        .post h2 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-        .post h3 { font-size: 1.25rem; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .post-content li { margin-bottom: 0.4rem; }
 
-        .post p { margin-bottom: 1rem; }
-
-        .post a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .post a:hover {
-            text-decoration: underline;
-        }
-
-        .post ul, .post ol {
-            margin: 1rem 0;
-            padding-left: 2rem;
-        }
-
-        .post ul { list-style-type: disc; }
-        .post ul ul { list-style-type: circle; }
-        .post ol { list-style-type: decimal; }
-        .post li { margin-bottom: 0.5rem; }
-
-        .post blockquote {
+        .post-content blockquote {
             border-left: 3px solid var(--accent);
-            margin: 1rem 0;
+            margin: 0.75rem 0;
             padding-left: 1rem;
             color: rgba(226, 225, 225, 0.7);
         }
@@ -293,7 +293,6 @@
             height: auto;
             border-radius: 8px;
             margin: 1rem 0;
-            display: block;
         }
 
         hr {
@@ -302,42 +301,61 @@
             margin: 1rem 0;
         }
 
-        .post table {
+        /* Таблицы */
+        .post-content table {
             border-collapse: collapse;
             width: 100%;
             margin: 1rem 0;
+            overflow-x: auto;
+            display: block;
         }
 
-        .post th, .post td {
+        .post-content th, .post-content td {
             border: 1px solid rgba(226, 225, 225, 0.2);
             padding: 0.5rem;
             text-align: left;
         }
 
-        .post th {
+        .post-content th {
             background-color: rgba(226, 225, 225, 0.05);
         }
 
+        /* Адаптивность */
         @media (max-width: 768px) {
-            .profile-name { display: none; }
-            .right-section { gap: 1rem; }
-            .social-links { gap: 0.75rem; }
+            .container { padding: 0.75rem; }
+            .post { padding: 1rem; }
+            .post-title { font-size: 1.4rem; }
+            .post-content h1 { font-size: 1.3rem; }
+            .post-content h2 { font-size: 1.2rem; }
+            .post-content h3 { font-size: 1.1rem; }
+        }
 
-            .post-header {
+        @media (max-width: 600px) {
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }
+
+            .logo { justify-content: center; }
+            .right-section { justify-content: space-between; width: 100%; }
+            .profile-name { font-size: 0.8rem; }
+            .profile-avatar { width: 28px; height: 28px; }
+
+            .container { padding: 0.5rem; }
+            .post { padding: 0.875rem; }
+            .post-title { font-size: 1.2rem; }
+
+            .post-meta {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 0.75rem;
-                position: static;
             }
 
-            .post-folder-name {
-                position: static;
-                transform: none;
-                white-space: normal;
-                font-size: 1.2rem;
-                order: -1;
-                margin-bottom: 0.25rem;
+            .post-tags {
+                justify-content: flex-start;
             }
+
+            .tag { font-size: 0.6rem; padding: 0.15rem 0.5rem; }
         }
     </style>
 </head>
@@ -350,10 +368,10 @@
             </a>
             <div class="right-section">
                 <div class="social-links">
-                    <a href="https://t.me/actugate" target="_blank"><i class="fab fa-telegram"></i></a>
-                    <a href="https://habr.com/ru/users/actugate/" target="_blank"><i class="fas fa-newspaper"></i></a>
-                    <a href="https://youtube.com/@actugate" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="https://xlebore3o4ka.itch.io/" target="_blank"><i class="fab fa-itch-io"></i></a>
+                    <a href="https://t.me/actugate" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="https://habr.com/ru/users/actugate/" target="_blank" aria-label="Habr"><i class="fas fa-newspaper"></i></a>
+                    <a href="https://youtube.com/@actugate" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://xlebore3o4ka.itch.io/" target="_blank" aria-label="Itch.io"><i class="fab fa-itch-io"></i></a>
                 </div>
                 <a href="https://github.com/xlebore3o4ka" class="profile" target="_blank"><span class="profile-name">xlebore3o4ka</span><img src="avatar.png" alt="avatar" class="profile-avatar"></a>
             </div>
@@ -364,12 +382,14 @@
         
         <article class="post">
             <div class="post-header">
+                <h1 class="post-title">Первый devlog Actugate</h1>
                 <div class="post-meta">
-                    <time datetime="2026-06-11T01:02:39.764412">Jun 11, 2026 01:02</time>
+                    <time datetime="2024-01-01T07:00:00">Jan 01, 2024 07:00</time>
+                    <div class="post-tags"><span class="tag" style="background-color: #2c3e50;">devlog</span><span class="tag" style="background-color: #27ae60;">update</span><span class="tag" style="background-color: #16a085;">announcement</span></div>
                 </div>
-                <div class="post-folder-name">Привет, мир!</div>
             </div>
-            <h3>Я считаю блог должен начаться с демонстрации</h3>
+            <div class="post-content">
+                <h3>Я считаю блог должен начаться с демонстрации</h3>
 <p><img src="posts/Привет, мир!/demo.gif" class="post-image" alt="демо-гифка!" width="250" /></p>
 <blockquote>
 <p>На этой демо-гифке изображен простой механизм нелинейного перемещения коробки<br />
@@ -418,6 +438,7 @@
 <li>попить чаю</li>
 <li>🤗</li>
 </ul>
+            </div>
         </article>
         
     </main>
