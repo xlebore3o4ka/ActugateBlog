@@ -604,7 +604,7 @@
         
     </main>
 
-    <script>
+        <script>
         const observerOptions = {
             threshold: 0,
             rootMargin: '-60px 0px -60px 0px'
@@ -635,34 +635,50 @@
         }, 100);
 
         if (window.matchMedia('(pointer: coarse)').matches) {
+            let activeIcon = null;
+            let clickOutsideHandler = null;
+
+            function closeTooltip() {
+                if (activeIcon) {
+                    activeIcon.classList.remove('active');
+                    activeIcon = null;
+                }
+                if (clickOutsideHandler) {
+                    document.removeEventListener('click', clickOutsideHandler);
+                    clickOutsideHandler = null;
+                }
+            }
+
             document.querySelectorAll('.quote-icon').forEach(icon => {
                 icon.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    const isActive = icon.classList.contains('active');
-
-                    document.querySelectorAll('.quote-icon.active').forEach(activeIcon => {
-                        if (activeIcon !== icon) {
-                            activeIcon.classList.remove('active');
-                        }
-                    });
-
-                    if (!isActive) {
-                        icon.classList.add('active');
-
-                        const closeTooltip = (e) => {
-                            if (!icon.contains(e.target)) {
-                                icon.classList.remove('active');
-                                document.removeEventListener('click', closeTooltip);
-                            }
-                        };
-
-                        setTimeout(() => {
-                            document.addEventListener('click', closeTooltip);
-                        }, 0);
-                    } else {
-                        icon.classList.remove('active');
+                    
+                    if (activeIcon === icon) {
+                        closeTooltip();
+                        return;
                     }
+                    
+                    closeTooltip();
+                    
+                    icon.classList.add('active');
+                    activeIcon = icon;
+                    
+                    clickOutsideHandler = (e) => {
+                        if (!icon.contains(e.target)) {
+                            closeTooltip();
+                        }
+                    };
+                    
+                    setTimeout(() => {
+                        document.addEventListener('click', clickOutsideHandler);
+                    }, 0);
                 });
+            });
+            
+            document.addEventListener('touchstart', (e) => {
+                if (activeIcon && !activeIcon.contains(e.target)) {
+                    closeTooltip();
+                }
             });
         }
     </script>
