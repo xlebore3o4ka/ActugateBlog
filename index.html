@@ -209,6 +209,19 @@
             border-color: rgba(226, 225, 225, 0.25);
         }
 
+        /* Анимации появления/исчезновения при скролле */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Заголовочная часть поста */
         .post-header {
             margin-bottom: 1.5rem;
@@ -380,17 +393,17 @@
 
     <main class="container">
         
-        <article class="post">
+        <article class="post fade-in-up" data-date="1781114559.764412">
             <div class="post-header">
                 <h1 class="post-title">Первый devlog Actugate</h1>
                 <div class="post-meta">
-                    <time datetime="2024-01-01T07:00:00">Jan 01, 2024 07:00</time>
+                    <time datetime="2026-06-11T01:02:39.764412">Jun 11, 2026 01:02</time>
                     <div class="post-tags"><span class="tag" style="background-color: #2c3e50;">devlog</span><span class="tag" style="background-color: #27ae60;">update</span><span class="tag" style="background-color: #16a085;">announcement</span></div>
                 </div>
             </div>
             <div class="post-content">
                 <h3>Я считаю блог должен начаться с демонстрации</h3>
-<p><img src="posts/Привет, мир!/demo.gif" class="post-image" alt="демо-гифка!" width="250" /></p>
+<p><img src="posts/post1/demo.gif" class="post-image" alt="демо-гифка!" width="250" /></p>
 <blockquote>
 <p>На этой демо-гифке изображен простой механизм нелинейного перемещения коробки<br />
 Можно увидеть как липкие поршни толкают активаторы, которые активируют другие<br />
@@ -415,7 +428,7 @@
 полностью перейти на него.</p>
 <hr />
 <div style="display: flex; justify-content: center;">
-    <img src="posts/Привет, мир!/banner.png" class="post-image" style="width: 70%; object-fit: cover;">
+    <img src="posts/post1/banner.png" class="post-image" style="width: 70%; object-fit: cover;">
 </div>
 
 <h2>Что будет в блоге?</h2>
@@ -442,5 +455,42 @@
         </article>
         
     </main>
+
+    <script>
+        // Intersection Observer для анимации появления постов при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Можно раскомментировать, если хочешь, чтобы анимация срабатывала только один раз
+                    // observer.unobserve(entry.target);
+                } else {
+                    // Убираем класс, когда пост уходит из зоны видимости
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Наблюдаем за всеми постами
+        document.querySelectorAll('.post').forEach(post => {
+            observer.observe(post);
+        });
+
+        // Немедленно проверяем видимые посты (для постов в зоне видимости при загрузке)
+        setTimeout(() => {
+            document.querySelectorAll('.post').forEach(post => {
+                const rect = post.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                if (rect.top < windowHeight - 100 && rect.bottom > 0) {
+                    post.classList.add('visible');
+                }
+            });
+        }, 100);
+    </script>
 </body>
 </html>
