@@ -197,6 +197,7 @@
             border: 1px solid rgba(226, 225, 225, 0.196);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             transition: box-shadow 0.2s ease, border-color 0.2s ease;
+            scroll-margin-top: 80px;
         }
 
         .post:hover {
@@ -382,6 +383,33 @@
             background-color: rgba(226, 225, 225, 0.05);
         }
 
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: #c0392b;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+            cursor: pointer;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         @media (max-width: 768px) {
             .container { padding: 0.75rem; }
             .post { padding: 1rem; }
@@ -393,6 +421,13 @@
             .quote-tooltip {
                 width: 280px;
                 right: -10px;
+            }
+
+            .notification {
+                top: 70px;
+                right: 10px;
+                left: 10px;
+                text-align: center;
             }
         }
 
@@ -467,10 +502,74 @@
 
     <main class="container">
         
-        <article class="post fade-in-up" data-date="1781168657.4889052">
+        <article class="post fade-in-up" data-date="1781369024.5983262" id="post-3">
             <div class="post-header">
                 <div class="post-title-wrapper">
-                    <h1 class="post-title">Что уже есть</h1>
+                    <h1 class="post-title">Командная работа</h1>
+                    <div class="quote-icon" data-description="Actugate отныне создается некой студией &quot;Thinkeater&quot;... Немного о проделанной работе">
+                        <i class="fas fa-quote-right"></i>
+                        <div class="quote-tooltip">
+                            <div class="quote-tooltip-content">
+                                <p>Actugate отныне создается некой студией "Thinkeater"... Немного о проделанной работе</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-meta">
+                    <time datetime="2026-06-13T23:43:44.598326">Jun 13, 2026 23:43</time>
+                    <div class="post-tags"><span class="tag" style="background-color: #2c3e50;">devlog</span><span class="tag" style="background-color: #8e44ad;">blog</span><span class="tag" style="background-color: #3b5998;">code</span><span class="tag" style="background-color: #16a085;">announcement</span></div>
+                </div>
+            </div>
+            <div class="post-content">
+                <h1>🎉 Actugate обрела свою команду!</h1>
+<div style="display: flex; justify-content: center;">
+    <img src="posts/post-3/thinkeater.png" class="post-image" alt="thinkeater" style="width: 80%; object-fit: cover;">
+</div>
+
+<blockquote>
+<p>Новообразовавшаяся студия <code>Thinkeater</code> решила взять первым проектом мою сырую, но имеющую большой потенциал игру <strong>Actugate</strong> как свой первый проект!</p>
+</blockquote>
+<hr />
+<h3>Thinkeater состоит из 3 принципиально разных участников:</h3>
+<p><img src="posts/post-3/contributors.png" class="post-image" alt="contributors" style="width: 30%; object-fit: cover;"></p>
+<ul>
+<li><code>medveed</code> — программист графического ядра, документатор, связывает движок логический с движком графическим</li>
+<li><code>NotAMono</code> — начинающий программист, тестировщик</li>
+<li><code>xlebore3o4ka</code> (Я) — разработчик логического ядра и тимлид команды</li>
+</ul>
+<p>Уверен, работа пойдет быстрее и будет качественнее, это важный шаг на пути к успеху <code>Actugate</code>!</p>
+<hr />
+<h3>Тем временем я уже успел реализовать многое...</h3>
+<p>Движок блога Усовершенствован! Он поддерживает ссылки непосредственно на посты.</p>
+<p>В <a href="posts/post-3/../../#post-2">предыдущем посте</a> я упоминал что данные пока не обрабатываются. Теперь это не так! Реализовано 30% логического ядра и 4% всего проекта.</p>
+<blockquote>
+<p>Напоминаю два дня назад было 2%... Черт возьми, я невероятно люблю <code>Nim</code>!🤗</p>
+</blockquote>
+<p>А из-за того что <code>medveed</code> занимается графикой, я перестал волнаваться о том как буду связывать ее с движком.</p>
+<h4>Если конкретнее...</h4>
+<p>Я реализовал сбор планов, разрешение конфликтов, применение планов на новый мир, двумя словами двухпроходное обновление. Теперь в игру практически можно играть! <em>В консоли...</em></p>
+<hr />
+<h3>Не хочу что бы кто-то пропустил мимо глаз</h3>
+<p>У <code>Actugate</code> есть много разных соцсетей:<br />
+- <a href="https://t.me/actugate">telegram channel</a><br />
+- <a href="https://www.youtube.com/@actugate">youtube channel</a><br />
+- <a href="https://xlebore3o4ka.itch.io/actugate">itch.io</a><br />
+- А так же мой <a href="https://github.com/xlebore3o4ka">github</a></p>
+<p>Так же хочу сообщить, что <strong>даже примерной даты релиза пока нет.</strong> Нам в команде нужно наладить общение, работу и прочее. Сама игра сложна и требует много времени на тестирование.</p>
+<p>Но что могу сказать наверняка...</p>
+<h3>Игра точно выйдет😍</h3>
+<hr />
+<blockquote>
+<p>В будущем, может быть, посты писать буду не только я.  А до той поры заваривайте себе чая и следите за всеми нашими соцсетями🤗</p>
+</blockquote>
+            </div>
+        </article>
+        
+
+        <article class="post fade-in-up" data-date="1781168657.4889052" id="post-2">
+            <div class="post-header">
+                <div class="post-title-wrapper">
+                    <h1 class="post-title">Первые шаги разработки</h1>
                     <div class="quote-icon" data-description="Показываю что есть на момент публикации поста">
                         <i class="fas fa-quote-right"></i>
                         <div class="quote-tooltip">
@@ -516,7 +615,7 @@
 <hr />
 <h2>Вернемся к Actugate</h2>
 <p>Ниже представлены несколько схем, доступные к постройке в демо-версии:</p>
-<p><img src="posts/post2/gates.png" class="post-image" alt="схемы" width="250" /></p>
+<p><img src="posts/post-2/gates.png" class="post-image" alt="схемы" width="250" /></p>
 <p>Это не космические корабли, а 4 логических вентиля: <code>not</code>, <code>or</code>, <code>and</code> и <code>xor</code>. Буквами <code>i&gt;</code> и <code>&lt;o</code> отмечены входы и выходы. Каждый цвет обозначений относится к своему вентилю.</p>
 <blockquote>
 <p>Букв нет в игре* Я добавил их в редакторе изображений.</p>
@@ -542,7 +641,7 @@
         </article>
         
 
-        <article class="post fade-in-up" data-date="1781166095.6389272">
+        <article class="post fade-in-up" data-date="1781166095.6389272" id="post-1">
             <div class="post-header">
                 <div class="post-title-wrapper">
                     <h1 class="post-title">Первый devlog Actugate</h1>
@@ -562,7 +661,7 @@
             </div>
             <div class="post-content">
                 <h3>Я считаю блог должен начаться с демонстрации</h3>
-<p><img src="posts/post1/demo.gif" class="post-image" alt="демо-гифка!" width="250" /></p>
+<p><img src="posts/post-1/demo.gif" class="post-image" alt="демо-гифка!" width="250" /></p>
 <blockquote>
 <p>На этой демо-гифке изображен простой механизм нелинейного перемещения коробки.<br />
 Можно увидеть как липкие поршни толкают активаторы, которые активируют другие поршни и так далее... В конце концов коробка не просто двигается вперед, но еще и вбок!</p>
@@ -579,7 +678,7 @@
 <p>Сегодня же я пишу прототип на <code>Nim</code>, а отрисовываю все тем же <code>raylib</code>. Честно говоря, благодаря этому проекту я и встретил сей прекрасный язык <code>Nim</code> и планирую полностью перейти на него.</p>
 <hr />
 <div style="display: flex; justify-content: center;">
-    <img src="posts/post1/banner.png" class="post-image" style="width: 70%; object-fit: cover;">
+    <img src="posts/post-1/banner.png" class="post-image" style="width: 70%; object-fit: cover;">
 </div>
 
 <h2>Что будет в блоге?</h2>
@@ -604,7 +703,9 @@
         
     </main>
 
-        <script>
+    <div id="notification" style="display: none;"></div>
+
+    <script>
         const observerOptions = {
             threshold: 0,
             rootMargin: '-60px 0px -60px 0px'
@@ -652,34 +753,72 @@
             document.querySelectorAll('.quote-icon').forEach(icon => {
                 icon.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    
+
                     if (activeIcon === icon) {
                         closeTooltip();
                         return;
                     }
-                    
+
                     closeTooltip();
-                    
+
                     icon.classList.add('active');
                     activeIcon = icon;
-                    
+
                     clickOutsideHandler = (e) => {
                         if (!icon.contains(e.target)) {
                             closeTooltip();
                         }
                     };
-                    
+
                     setTimeout(() => {
                         document.addEventListener('click', clickOutsideHandler);
                     }, 0);
                 });
             });
-            
+
             document.addEventListener('touchstart', (e) => {
                 if (activeIcon && !activeIcon.contains(e.target)) {
                     closeTooltip();
                 }
             });
+        }
+
+        function showNotification(message, isError = true) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            notification.style.backgroundColor = isError ? '#c0392b' : '#27ae60';
+            notification.className = 'notification';
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+
+            notification.onclick = () => {
+                notification.style.display = 'none';
+            };
+        }
+
+        if (window.location.hash) {
+            const targetId = window.location.hash.substring(1);
+            const targetPost = document.getElementById(targetId);
+
+            if (targetPost) {
+                setTimeout(() => {
+                    targetPost.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }, 100);
+            } else {
+                showNotification(`Post with ID "${targetId}" not found`, true);
+
+                if (window.location.hash) {
+                    setTimeout(() => {
+                        window.location.hash = '';
+                    }, 100);
+                }
+            }
         }
     </script>
 </body>
