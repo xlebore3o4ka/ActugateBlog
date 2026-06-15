@@ -383,31 +383,76 @@
             background-color: rgba(226, 225, 225, 0.05);
         }
 
+        .post-footer {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .post-share-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .post-id-subtle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: rgba(226, 225, 225, 0.3);
+            letter-spacing: 0.3px;
+        }
+
+        .share-button {
+            background: none;
+            border: none;
+            color: rgba(226, 225, 225, 0.5);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .share-button:hover {
+            color: var(--accent);
+            background-color: rgba(35, 175, 95, 0.1);
+            transform: scale(1.05);
+        }
+
+        .share-button:active {
+            transform: scale(0.95);
+        }
+
         .notification {
             position: fixed;
             top: 80px;
             right: 20px;
-            background-color: #c0392b;
+            background-color: #27ae60;
             color: white;
-            padding: 1rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             border-radius: 8px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
+            font-weight: 500;
             z-index: 1000;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            animation: slideIn 0.3s ease-out;
-            cursor: pointer;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .notification.hide {
+            opacity: 0;
+            transform: translateX(100%);
         }
 
         @media (max-width: 768px) {
@@ -462,6 +507,15 @@
                 width: 260px;
                 right: -20px;
             }
+
+            .post-id-subtle {
+                font-size: 0.65rem;
+            }
+
+            .share-button {
+                font-size: 1rem;
+                padding: 0.3rem 0.5rem;
+            }
         }
 
         @media (pointer: coarse) {
@@ -502,6 +556,89 @@
 
     <main class="container">
         
+        <article class="post fade-in-up" data-date="1781547246.8666656" id="post-4">
+            <div class="post-header">
+                <div class="post-title-wrapper">
+                    <h1 class="post-title">Поршни, стержни, SMM и немного грядущего</h1>
+                    <div class="quote-icon" data-description="Логический движок закончен наполовину, графика начинает строится. В планах важное событие и грандиозные идеи.">
+                        <i class="fas fa-quote-right"></i>
+                        <div class="quote-tooltip">
+                            <div class="quote-tooltip-content">
+                                <p>Логический движок закончен наполовину, графика начинает строится. В планах важное событие и грандиозные идеи.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-meta">
+                    <time datetime="2026-06-16T01:14:06.866666">Jun 16, 2026 01:14</time>
+                    <div class="post-tags"><span class="tag" style="background-color: #2c3e50;">devlog</span><span class="tag" style="background-color: #27ae60;">update</span><span class="tag" style="background-color: #8e44ad;">blog</span><span class="tag" style="background-color: #3b5998;">code</span><span class="tag" style="background-color: #d35400;">idea</span></div>
+                </div>
+            </div>
+            <div class="post-content">
+                <h2>📈Логический движок завершен на 50%!</h2>
+<p>Сейчас моя часть работы выполнена примерно на половину. Более того, движок уже работает с <strong>математической точностью</strong>, детерминированно обрабатывает <strong>конфликты</strong>, а так же является <strong>легко-расширяемым</strong>!</p>
+<p><code>@medveed</code> активно работает над графической составляющей игры, но пока показывать нечего.</p>
+<p>Вся наша команда продолжает изучать <code>Nim</code>! Лично я не могу не сказать насколько он прекрасен. 🥰 Остальным же он тоже дается легко.</p>
+<blockquote>
+<p>По примерным оценкам игра готова на 5-6%</p>
+</blockquote>
+<h3>🥳Движок блога достиг отметки в ровно 1000 строк и 31.1к символов!</h3>
+<p>Я пишу его почти вручную с минимальным использованием нейро-ассистентов.</p>
+<hr />
+<h2>Расширение штата</h2>
+<p>В студию <code>Thinkeater</code> планирует присоединиться новый человек, который будет отвечать за SMM! Выкладывать посты, создавать контент, все это он мог бы взять под свой контроль...</p>
+<p>Но пока это событие под вопросом. 👀</p>
+<hr />
+<h3>Тестирование игры происходит вручную, в консоли</h3>
+<blockquote>
+<p>Я создал небольшой TUI в котором можно размещать, удалять и просматривать клетки, а отображаются они в красивом, хоть и не очень понятном CLI формате:</p>
+</blockquote>
+<pre class="codehilite"><code>P* -&gt; ## P* .. p&gt;
+## .. ..  v .. &lt;p
+P* &lt;- *P ## .. p^
+ v .. .. .. .. pv 
+## P* -&gt; ## .. ##
+</code></pre>
+
+<p>Объяснять тут особо нечего, обычный тест цепной реакции и отображения. Важно то, что у некоторых клеток расширилась хранимая ими информация🤔</p>
+<ul>
+<li>У всех клеток появилось свое ID, уникальное число на весь мир. При этом это число умное и растет не бесконечно, а переиспользует незанятые идентификаторы!</li>
+<li>Поршень знает ID своего стержня, если таковой имеется. Видите звездочку на консольном выводе рядом с поршнем <code>P*</code>? Звездочка говорит что поршень имеет стержень, а то что буква стержня заглавная о том, что он активирован!</li>
+<li>Стержень же не знает ID своего поршня, он знает только позицию. Возникает логичный вопрос, а что если позиция поршня изменится? Отличный вопрос! На самом деле все поршни это учитывают и если они будут двигаться они просто-напросто не могут иметь стержень!</li>
+</ul>
+<p>В игре сейчас только 3 типа клетки: <code>поршень</code>, <code>стержень</code> и <code>активатор</code></p>
+<hr />
+<h2>В планах</h2>
+<p>На логический движок планы следующие:</p>
+<ul>
+<li>2 оставшихся типов клеток: <code>Липкий поршень</code> и <code>Коробка</code></li>
+<li>Вся логика связанная с коробками и липкой версией поршня</li>
+<li>Отладить движок до точности выше математической!</li>
+</ul>
+<p>Связать логический движок с графическим. Интересный факт:</p>
+<h3>Логический движок логически никак не связан с движком графическим</h3>
+<p>Что это значит? <strong>Мир совершенно не знает о том, что его отрисовывают!</strong> Это значит что в будущем можно изменять графику как угодно, но никакая логика от этого не пострадает.</p>
+<hr />
+<h2>Планы на далекое будущее</h2>
+<p>Challenge mode!⭐ Это будет <strong>точно</strong> не скоро, но в моей голове есть примерная картина:</p>
+<p>В этом режиме тебе предстоит в ограниченном пространстве выполнить некое задание. Ты должен будешь передвинуть коробку из точки A в точку B, активировать специальный выход определенным образом или решить сложную головоломку.</p>
+<p>В твоем арсенале ограниченное количество определенных клеток. Их ты можешь размещать как и куда угодно, но так же в этом режиме будут находиться клетки, поставленные заранее. Используя комбинацию взаимодействий своих клеток с уровнем ты должен создавать мост между задачей и решением!</p>
+<p>За каждый уровень будет начислен определенный счет и он тем больше, чем меньше клеток ты будешь использовать. Грубо говоря твои "неиспользованные" клетки перейдут в счет.</p>
+<p>Самое главное: <strong>у игроков будет возможность создавать свои уровни!</strong> Хоть и не каждому это будет дано.</p>
+<hr />
+<p>Не забывайте пить чай🤗 И следить за новостями!</p>
+            </div>
+            <div class="post-footer">
+                <div class="post-share-group">
+                    <span class="post-id-subtle">post-4</span>
+                    <button class="share-button" data-post-id="post-4" aria-label="Share post">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+        
+
         <article class="post fade-in-up" data-date="1781369024.5983262" id="post-3">
             <div class="post-header">
                 <div class="post-title-wrapper">
@@ -562,6 +699,14 @@
 <blockquote>
 <p>В будущем, может быть, посты писать буду не только я.  А до той поры заваривайте себе чая и следите за всеми нашими соцсетями🤗</p>
 </blockquote>
+            </div>
+            <div class="post-footer">
+                <div class="post-share-group">
+                    <span class="post-id-subtle">post-3</span>
+                    <button class="share-button" data-post-id="post-3" aria-label="Share post">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
             </div>
         </article>
         
@@ -638,6 +783,14 @@
 <p><strong>Начать выкладываться на ютуб!</strong> Хочу что бы кто-нибудь заинтересовался игрой, стал следить за блогом, давал мне идеи...</p>
 <p>Ну а до той поры, буду выкладывать посты в блог о том как идет разработка! До связи.</p>
             </div>
+            <div class="post-footer">
+                <div class="post-share-group">
+                    <span class="post-id-subtle">post-2</span>
+                    <button class="share-button" data-post-id="post-2" aria-label="Share post">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
         </article>
         
 
@@ -699,11 +852,19 @@
 <li>🤗</li>
 </ul>
             </div>
+            <div class="post-footer">
+                <div class="post-share-group">
+                    <span class="post-id-subtle">post-1</span>
+                    <button class="share-button" data-post-id="post-1" aria-label="Share post">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
         </article>
         
     </main>
 
-    <div id="notification" style="display: none;"></div>
+    <div id="notification" class="notification">Copied!</div>
 
     <script>
         const observerOptions = {
@@ -783,21 +944,52 @@
             });
         }
 
-        function showNotification(message, isError = true) {
+        let notificationTimeout = null;
+
+        function showNotification() {
             const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.style.display = 'block';
-            notification.style.backgroundColor = isError ? '#c0392b' : '#27ae60';
-            notification.className = 'notification';
 
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 5000);
+            if (notificationTimeout) {
+                clearTimeout(notificationTimeout);
+                notification.classList.remove('show', 'hide');
+                void notification.offsetWidth;
+            }
 
-            notification.onclick = () => {
-                notification.style.display = 'none';
-            };
+            notification.classList.add('show');
+
+            notificationTimeout = setTimeout(() => {
+                notification.classList.add('hide');
+                notificationTimeout = setTimeout(() => {
+                    notification.classList.remove('show', 'hide');
+                }, 300);
+            }, 1500);
         }
+
+        document.querySelectorAll('.share-button').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const postId = button.getAttribute('data-post-id');
+                const fullUrl = window.location.href.split('#')[0] + '#' + postId;
+
+                try {
+                    await navigator.clipboard.writeText(fullUrl);
+                    showNotification();
+                } catch (err) {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = fullUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    showNotification();
+                }
+
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = '';
+                }, 150);
+            });
+        });
 
         if (window.location.hash) {
             const targetId = window.location.hash.substring(1);
@@ -811,7 +1003,14 @@
                     });
                 }, 100);
             } else {
-                showNotification(`Post with ID "${targetId}" not found`, true);
+                const notification = document.getElementById('notification');
+                notification.textContent = 'Post not found';
+                notification.style.backgroundColor = '#c0392b';
+                showNotification();
+                setTimeout(() => {
+                    notification.textContent = 'Copied!';
+                    notification.style.backgroundColor = '#27ae60';
+                }, 2000);
 
                 if (window.location.hash) {
                     setTimeout(() => {
