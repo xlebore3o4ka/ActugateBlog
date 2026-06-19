@@ -1,5 +1,5 @@
 <div style="display: flex; justify-content: center;">
-    <img src="posts/post-1/banner.png" style="width: 70%; object-fit: cover;">
+    <img src="posts/post-1/banner.png" style="width: 71%; object-fit: cover;">
 </div>
 
 ## Что будет в [блоге](https://xlebore3o4ka.github.io/ActugateBlog)?
