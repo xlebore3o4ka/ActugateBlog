@@ -556,7 +556,104 @@
 
     <main class="container">
         
-        <article class="post fade-in-up" data-date="1781548038.250898" id="post-4">
+        <article class="post fade-in-up" data-date="1782316788.1231217" id="post-5">
+            <div class="post-header">
+                <div class="post-title-wrapper">
+                    <h1 class="post-title">Тимлид без отдыха - мих. Хобби и графика!</h1>
+                    <div class="quote-icon" data-description="В посте освещается тема прокрастинации и ее решения. Показана первая демонстрация графического движка и баги.">
+                        <i class="fas fa-quote-right"></i>
+                        <div class="quote-tooltip">
+                            <div class="quote-tooltip-content">
+                                <p>В посте освещается тема прокрастинации и ее решения. Показана первая демонстрация графического движка и баги.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-meta">
+                    <time datetime="2026-06-24T22:59:48.123122">Jun 24, 2026 22:59</time>
+                    <div class="post-tags"><span class="tag" style="background-color: #16a085;">announcement</span><span class="tag" style="background-color: #f39c12;">bugfix</span><span class="tag" style="background-color: #2c3e50;">devlog</span><span class="tag" style="background-color: #3b5998;">code</span><span class="tag" style="background-color: #e67e22;">kovyl</span><span class="tag" style="background-color: #2ecc71;">actugate</span></div>
+                </div>
+            </div>
+            <div class="post-content">
+                <h1>Я взял небольшой перерыв</h1>
+<p>За раз было реализовано несколько мощных вещей. Я нашел себе хобби, отличное от Actugate. Считаю это полезно и уменьшит шанс прокрастенации на фоне усталости от монотонной работы над ядром и бытия тимлида.</p>
+<p>В этом посте:</p>
+<ul>
+<li><strong>Графический движок</strong> - скорость разработки медведя</li>
+<li><strong>Горячие сливы</strong> - графического движка и структуры проекта</li>
+<li><strong>Система тестов</strong> - на сколько легко их стало писать</li>
+<li><strong>Подробнее о хобби</strong> - что это такое?</li>
+<li>Чай🤗</li>
+</ul>
+<hr />
+<h1>Графический движок</h1>
+<p><code>@medveed</code> показал текущее состояние движка. Реализовано примитивное отображение клеток и их состояния. Плавное перемещение и изменение масштаба камеры.</p>
+<p><img src="posts/post-5/medveed-engine.gif" class="post-image" alt="графический движок gif" width="400" /></p>
+<p>Управление из окна пока не реализовано, так что быстрое тестирование по прежнему происходит в консоли.</p>
+<hr />
+<h1>Структура проекта</h1>
+<p>Она увеличилась с последнего показа:</p>
+<pre class="codehilite"><code>Actugate
+|-- build
+|-- src
+|   |-- core
+|   |   |-- core.nim
+|   |   `-- utils.nim
+|   |-- data
+|   |   |-- cells.nim
+|   |   |-- plans.nim
+|   |   `-- spatial.nim
+|   |-- render
+|   |   |-- camera.nim
+|   |   |-- colors.nim
+|   |   |-- coords.nim
+|   |   |-- draw.nim
+|   |   |-- grid.nim
+|   |   |-- renderer.nim
+|   |   |-- types.nim
+|   |   `-- utils.nim
+|   `-- actugate.nim
+|-- tests
+|   |-- cells_stay.nim
+|   |-- piston_activated_cross.nim
+|   `-- piston_activates_dif_dirs.nim
+`-- actugate.nimble
+</code></pre>
+
+<p><code>core</code> и <code>data</code> - заслуга моя, <code>@xlebore3o4ka</code>. Кажется что я сделал немного, но в этих 5 файлах содержится достаточно оптимизированное ядро всей игры.</p>
+<p>За <code>render</code> спасибо <code>@medveed</code>, он делает отличную, чистую работу, но на этом все еще не кончено...</p>
+<hr />
+<h1>Тесты</h1>
+<p>В TUI я создал невероятно удобную команду, позволяющая собирать большой файл теста используя пару игровых сохранений. </p>
+<p><code>S name</code> - команда, позволяющая создать сохранение. Она запоминает весь мир и тик, на котором это сохранение было совершенно.</p>
+<p><code>T name init t1 t2 t3</code> - та самая <strong>волшебная</strong> команда. Она собирает из нескольких сохранений тест. В файле теста автоматически появляется загрузка мира и проверки на требуемое состояние. Все что требуется от меня это задать эти состояния.</p>
+<p>Пока тестов всего 3, но их потребуется примерно в 10 раз больше, что бы ничего не сломать🤗</p>
+<h3>Забавный баг</h3>
+<p>И без багов не обходится! Тесты показали что флаг <code>keep</code> (который позволяет клетке оставаться на месте) сбрасывался <strong>некорректно</strong> и благодаря тестам этот баг был исправлен!</p>
+<hr />
+<h1>Хобби</h1>
+<p>Думать каждый день о механике, решать баги и конструировать сложную систему часто ведет к моральной усталости и прокрастенации...</p>
+<h3>По этому я решил параллельно создавать свой язык программирования!</h3>
+<p>Знакомьтесь, это Kovyl:</p>
+<p><img src="posts/post-5/kovyl-logo.png" class="post-image" alt="логотип kovyl" width="400" /></p>
+<p>Я добавил два новых тега для потов: <code>Kovyl</code> и <code>Actugate</code> и блог разделится на разработку того и другово!</p>
+<hr />
+<h1>Итог</h1>
+<p>К готовности проекта можно накинуть 1% за графику, но пока до релиза далеко😅</p>
+<p>На этом пока все. Осталось только чаю попить ну и ладно🤗</p>
+            </div>
+            <div class="post-footer">
+                <div class="post-share-group">
+                    <span class="post-id-subtle">post-5</span>
+                    <button class="share-button" data-post-id="post-5" aria-label="Share post">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+        
+
+        <article class="post fade-in-up" data-date="1782305831.3567889" id="post-4">
             <div class="post-header">
                 <div class="post-title-wrapper">
                     <h1 class="post-title">Поршни, стержни, SMM и немного о грядущем</h1>
@@ -570,7 +667,7 @@
                     </div>
                 </div>
                 <div class="post-meta">
-                    <time datetime="2026-06-16T01:27:18.250898">Jun 16, 2026 01:27</time>
+                    <time datetime="2026-06-24T19:57:11.356789">Jun 24, 2026 19:57</time>
                     <div class="post-tags"><span class="tag" style="background-color: #2c3e50;">devlog</span><span class="tag" style="background-color: #27ae60;">update</span><span class="tag" style="background-color: #8e44ad;">blog</span><span class="tag" style="background-color: #3b5998;">code</span><span class="tag" style="background-color: #d35400;">idea</span></div>
                 </div>
             </div>
@@ -612,7 +709,7 @@ P* &lt;- *P ## .. p^
 <h2>В планах</h2>
 <p>На логический движок планы следующие:</p>
 <ul>
-<li>2 оставшихся типов клеток: <code>Липкий поршень</code> и <code>Коробка</code></li>
+<li>2 оставшихся типа клеток: <code>Липкий поршень</code> и <code>Коробка</code></li>
 <li>Вся логика связанная с коробками и липкой версией поршня</li>
 <li>Отладить движок до точности выше математической!</li>
 </ul>
@@ -640,7 +737,7 @@ P* &lt;- *P ## .. p^
         </article>
         
 
-        <article class="post fade-in-up" data-date="1781369024.5983262" id="post-3">
+        <article class="post fade-in-up" data-date="1782300502.7919316" id="post-3">
             <div class="post-header">
                 <div class="post-title-wrapper">
                     <h1 class="post-title">Командная работа</h1>
@@ -654,7 +751,7 @@ P* &lt;- *P ## .. p^
                     </div>
                 </div>
                 <div class="post-meta">
-                    <time datetime="2026-06-13T23:43:44.598326">Jun 13, 2026 23:43</time>
+                    <time datetime="2026-06-24T18:28:22.791932">Jun 24, 2026 18:28</time>
                     <div class="post-tags"><span class="tag" style="background-color: #2c3e50;">devlog</span><span class="tag" style="background-color: #8e44ad;">blog</span><span class="tag" style="background-color: #3b5998;">code</span><span class="tag" style="background-color: #16a085;">announcement</span></div>
                 </div>
             </div>
@@ -712,7 +809,7 @@ P* &lt;- *P ## .. p^
         </article>
         
 
-        <article class="post fade-in-up" data-date="1781168657.4889052" id="post-2">
+        <article class="post fade-in-up" data-date="1782300502.791682" id="post-2">
             <div class="post-header">
                 <div class="post-title-wrapper">
                     <h1 class="post-title">Первые шаги разработки</h1>
@@ -726,7 +823,7 @@ P* &lt;- *P ## .. p^
                     </div>
                 </div>
                 <div class="post-meta">
-                    <time datetime="2026-06-11T16:04:17.488905">Jun 11, 2026 16:04</time>
+                    <time datetime="2026-06-24T18:28:22.791682">Jun 24, 2026 18:28</time>
                     <div class="post-tags"><span class="tag" style="background-color: #2c3e50;">devlog</span><span class="tag" style="background-color: #8e44ad;">blog</span><span class="tag" style="background-color: #3b5998;">code</span><span class="tag" style="background-color: #2980b9;">tutorial</span></div>
                 </div>
             </div>
@@ -795,7 +892,7 @@ P* &lt;- *P ## .. p^
         </article>
         
 
-        <article class="post fade-in-up" data-date="1781166095.6389272" id="post-1">
+        <article class="post fade-in-up" data-date="1782300502.790849" id="post-1">
             <div class="post-header">
                 <div class="post-title-wrapper">
                     <h1 class="post-title">Первый devlog Actugate</h1>
@@ -809,7 +906,7 @@ P* &lt;- *P ## .. p^
                     </div>
                 </div>
                 <div class="post-meta">
-                    <time datetime="2026-06-11T15:21:35.638927">Jun 11, 2026 15:21</time>
+                    <time datetime="2026-06-24T18:28:22.790849">Jun 24, 2026 18:28</time>
                     <div class="post-tags"><span class="tag" style="background-color: #2c3e50;">devlog</span><span class="tag" style="background-color: #16a085;">announcement</span></div>
                 </div>
             </div>
